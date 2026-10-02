@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aprende Programación y POO con C# y Windows Forms</title>
+<style>
+:root{--g:#04aa6d;--gd:#059862;--bg:#fff;--tx:#222;--sb:#e7e9eb;--cd:#f1f1f1;--cb:#282a35;--ct:#e6e6e6;--ac:#ddffdd;--bd:#ccc}
+@media(prefers-color-scheme:dark){:root{--bg:#1c1e26;--tx:#e4e4e4;--sb:#282a35;--cd:#2b2d38;--ac:#1d3b2c;--bd:#444}}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.65 Verdana,Segoe UI,sans-serif;background:var(--bg);color:var(--tx)}
+header{background:var(--cb);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:5}
+header h1{font-size:19px;margin:0}header b{color:var(--g)}
+#mb{display:none;background:none;border:0;color:#fff;font-size:24px}
+.wrap{display:flex}
+nav{width:230px;min-width:230px;background:var(--sb);padding:12px 0;height:calc(100vh - 54px);position:sticky;top:54px;overflow:auto}
+nav h4{margin:12px 16px 4px;color:var(--gd);font-size:13px;text-transform:uppercase}
+nav a{display:block;padding:6px 16px;color:var(--tx);text-decoration:none;font-size:14px}
+nav a:hover,nav a.on{background:var(--g);color:#fff}
+main{flex:1;padding:20px 32px;max-width:960px;min-width:0}
+section{margin-bottom:46px;scroll-margin-top:70px}
+h2{border-bottom:3px solid var(--g);padding-bottom:6px}
+h3{color:var(--gd);margin-top:28px}
+pre{background:var(--cb);color:var(--ct);padding:14px;border-radius:6px;overflow-x:auto;font:14px/1.5 Consolas,monospace;border-left:5px solid var(--g)}
+code{background:var(--cd);padding:1px 5px;border-radius:3px;font-family:Consolas,monospace;font-size:.92em}
+pre code{background:none;padding:0}
+.k{color:#7ec8ff}.s{color:#f2a07b}.c{color:#8fbc8f}.t{color:#4ec9b0}
+.box{background:var(--ac);border-left:6px solid var(--g);padding:10px 16px;border-radius:4px;margin:16px 0}
+.warn{background:#fff4cc;color:#333;border-left-color:#f5b800}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+th{background:var(--g);color:#fff;text-align:left}td,th{border:1px solid var(--bd);padding:7px 10px}
+tr:nth-child(even){background:var(--cd)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card{background:var(--cd);border-top:4px solid var(--g);padding:12px;border-radius:4px}
+.card b{color:var(--gd)}
+svg{max-width:100%;height:auto;display:block;margin:14px auto}
+svg text{font-family:Verdana,sans-serif;fill:#222}
+.demo{background:var(--cd);border:1px solid var(--bd);border-radius:6px;padding:14px;margin:14px 0}
+.win{width:340px;max-width:100%;border:1px solid #666;background:#f0f0f0;color:#000;font:13px Segoe UI,Arial;box-shadow:3px 3px 8px #0004}
+.win .tb{background:#0078d7;color:#fff;padding:5px 8px;display:flex;justify-content:space-between}
+.win .bd{padding:12px;display:grid;gap:8px}
+.win input,.win button,.win select{font:13px Segoe UI,Arial;padding:4px}
+.win button{background:#e1e1e1;border:1px solid #adadad}.win button:hover{background:#e5f1fb;border-color:#0078d7}
+.q button{display:block;margin:6px 0;padding:8px 12px;width:100%;text-align:left;border:1px solid var(--bd);background:var(--bg);color:var(--tx);cursor:pointer;border-radius:4px}
+.ok{background:#c8f7c5!important}.no{background:#ffc9c9!important}
+footer{background:var(--cb);color:#aaa;text-align:center;padding:18px;font-size:13px}
+@media(max-width:800px){#mb{display:block}nav{position:fixed;left:-250px;top:54px;z-index:4;transition:.2s}nav.open{left:0}main{padding:14px}}
+</style>
+</head>
+<body>
+<header><button id="mb" onclick="document.querySelector('nav').classList.toggle('open')">☰</button><h1>Aprende <b>Programación</b> y <b>POO</b> con C#</h1></header>
+<div class="wrap">
+<nav>
+<h4>Parte 1 · Fundamentos</h4>
+<a href="#intro">Introducción</a><a href="#algoritmos">Algoritmos y diagramas</a><a href="#variables">Variables y tipos</a><a href="#operadores">Operadores</a><a href="#condicionales">Condicionales</a><a href="#bucles">Ciclos</a><a href="#arreglos">Arreglos</a><a href="#funciones">Funciones</a>
+<h4>Parte 2 · POO</h4>
+<a href="#poo">¿Qué es la POO?</a><a href="#clases">Clases y objetos</a><a href="#encap">Encapsulamiento</a><a href="#herencia">Herencia</a><a href="#poli">Polimorfismo</a>
+<h4>Parte 3 · Windows Forms</h4>
+<a href="#vs">Visual Studio</a><a href="#winforms">Proyecto WinForms</a><a href="#controles">Controles básicos</a><a href="#eventos">Eventos</a><a href="#proyecto">Mini proyecto</a>
+<h4>Práctica</h4><a href="#quiz">Autoevaluación</a>
+</nav>
+<main>
+
+<section id="intro"><h2>Introducción</h2>
+<p><b>Programar</b> es darle instrucciones precisas a una computadora para resolver un problema. Un programa es una receta: los <i>ingredientes</i> son los datos y los <i>pasos</i> son las instrucciones.</p>
+<svg viewBox="0 0 640 90" width="640"><g stroke="#04aa6d" stroke-width="2" fill="#ddffdd"><rect x="5" y="20" width="110" height="50" rx="8"/><rect x="175" y="20" width="110" height="50" rx="8"/><rect x="345" y="20" width="110" height="50" rx="8"/><rect x="515" y="20" width="110" height="50" rx="8"/></g><g text-anchor="middle" font-size="13"><text x="60" y="50">Problema</text><text x="230" y="50">Algoritmo</text><text x="400" y="50">Código C#</text><text x="570" y="50">Resultado</text></g><g stroke="#333" stroke-width="2" fill="none"><path d="M115 45h60M285 45h60M455 45h60"/></g><g fill="#333"><path d="M175 45l-9-5v10zM345 45l-9-5v10zM515 45l-9-5v10z"/></g></svg>
+<div class="box"><b>Ruta de estudio:</b> primero la lógica (Parte 1), luego el paradigma de objetos (Parte 2) y finalmente construimos aplicaciones con ventanas en Visual Studio (Parte 3). Los ejemplos usan C#.</div></section>
+
+<section id="algoritmos"><h2>Algoritmos y diagramas de flujo</h2>
+<p>Un <b>algoritmo</b> es una secuencia finita y ordenada de pasos para resolver un problema. Debe ser <i>preciso, finito y con resultado esperado</i>. Se representa con pseudocódigo o con diagramas de flujo.</p>
+<svg viewBox="0 0 520 330" width="480"><g stroke="#04aa6d" stroke-width="2" fill="#ddffdd"><rect x="190" y="5" width="140" height="36" rx="18"/><path d="M170 70h180l-20 36H150z"/><path d="M260 130l95 45-95 45-95-45z"/><rect x="40" y="250" width="150" height="36" rx="4"/><rect x="330" y="250" width="150" height="36" rx="4"/></g>
+<g text-anchor="middle" font-size="13"><text x="260" y="28">Inicio</text><text x="250" y="93">Leer nota</text><text x="260" y="180">¿nota ≥ 60?</text><text x="115" y="273">Mostrar "Aprobado"</text><text x="405" y="273">Mostrar "Reprobado"</text><text x="150" y="160">Sí</text><text x="372" y="160">No</text></g>
+<g stroke="#333" stroke-width="2" fill="none"><path d="M260 41v29M260 106v24M165 175h-50v75M355 175h50v75"/></g><text x="260" y="320" text-anchor="middle" font-size="12">Óvalo = inicio/fin · Paralelogramo = entrada/salida · Rombo = decisión · Rectángulo = proceso</text></svg></section>
+
+<section id="variables"><h2>Variables y tipos de datos</h2>
+<p>Una <b>variable</b> es un espacio con nombre en la memoria que guarda un valor. C# es un lenguaje <i>fuertemente tipado</i>: cada variable declara qué tipo de dato almacena.</p>
+<svg viewBox="0 0 560 90" width="520"><g stroke="#04aa6d" stroke-width="2" fill="#ddffdd"><rect x="10" y="20" width="120" height="50"/><rect x="150" y="20" width="120" height="50"/><rect x="290" y="20" width="120" height="50"/><rect x="430" y="20" width="120" height="50"/></g><g text-anchor="middle" font-size="12"><text x="70" y="42">edad</text><text x="70" y="60">int = 19</text><text x="210" y="42">precio</text><text x="210" y="60">double = 9.5</text><text x="350" y="42">nombre</text><text x="350" y="60">string = "Ana"</text><text x="490" y="42">activo</text><text x="490" y="60">bool = true</text></g></svg>
+<table><tr><th>Tipo</th><th>Guarda</th><th>Ejemplo</th></tr><tr><td><code>int</code></td><td>Enteros</td><td><code>int edad = 19;</code></td></tr><tr><td><code>double</code> / <code>decimal</code></td><td>Decimales (decimal para dinero)</td><td><code>double pi = 3.1416;</code></td></tr><tr><td><code>char</code></td><td>Un carácter</td><td><code>char letra = 'A';</code></td></tr><tr><td><code>string</code></td><td>Texto</td><td><code>string n = "Ana";</code></td></tr><tr><td><code>bool</code></td><td>true / false</td><td><code>bool ok = true;</code></td></tr></table>
+<pre><code><span class="t">string</span> nombre = <span class="s">"Ana"</span>;
+<span class="t">int</span> edad = <span class="k">19</span>;
+Console.WriteLine(<span class="s">$"Hola {nombre}, tienes {edad} años"</span>); <span class="c">// interpolación</span>
+<span class="t">int</span> n = <span class="t">int</span>.Parse(Console.ReadLine()); <span class="c">// convertir texto a número</span></code></pre></section>
+
+<section id="operadores"><h2>Operadores</h2>
+<table><tr><th>Tipo</th><th>Operadores</th><th>Ejemplo</th></tr><tr><td>Aritméticos</td><td><code>+ - * / %</code></td><td><code>7 % 2</code> → 1</td></tr><tr><td>Comparación</td><td><code>== != &lt; &gt; &lt;= &gt;=</code></td><td><code>5 &gt;= 3</code> → true</td></tr><tr><td>Lógicos</td><td><code>&amp;&amp; || !</code></td><td><code>edad&gt;=18 &amp;&amp; activo</code></td></tr><tr><td>Asignación</td><td><code>= += -= ++ --</code></td><td><code>x += 2;</code></td></tr></table>
+<div class="box warn"><b>Cuidado:</b> <code>=</code> asigna un valor; <code>==</code> compara. Además, <code>7 / 2</code> entre enteros da <code>3</code>, no 3.5.</div></section>
+
+<section id="condicionales"><h2>Estructuras condicionales</h2>
+<p>Permiten que el programa tome decisiones según una condición.</p>
+<pre><code><span class="t">int</span> nota = <span class="k">75</span>;
+<span class="k">if</span> (nota &gt;= <span class="k">90</span>) Console.WriteLine(<span class="s">"Excelente"</span>);
+<span class="k">else if</span> (nota &gt;= <span class="k">60</span>) Console.WriteLine(<span class="s">"Aprobado"</span>);
+<span class="k">else</span> Console.WriteLine(<span class="s">"Reprobado"</span>);
+
+<span class="k">switch</span> (dia) {
+  <span class="k">case</span> <span class="k">1</span>: Console.WriteLine(<span class="s">"Lunes"</span>); <span class="k">break</span>;
+  <span class="k">default</span>: Console.WriteLine(<span class="s">"Otro"</span>); <span class="k">break</span>;
+}</code></pre></section>
+
+<section id="bucles"><h2>Ciclos (bucles)</h2>
+<p>Repiten un bloque de código. Usa <code>for</code> si conoces el número de repeticiones y <code>while</code> si depende de una condición.</p>
+<div class="grid"><div class="card"><b>for</b><br>Contador conocido</div><div class="card"><b>while</b><br>Evalúa antes de ejecutar</div><div class="card"><b>do…while</b><br>Ejecuta al menos una vez</div><div class="card"><b>foreach</b><br>Recorre colecciones</div></div>
+<pre><code><span class="k">for</span> (<span class="t">int</span> i = <span class="k">1</span>; i &lt;= <span class="k">5</span>; i++)
+    Console.WriteLine(<span class="s">$"2 x {i} = {2 * i}"</span>);
+
+<span class="t">int</span> suma = <span class="k">0</span>;
+<span class="k">while</span> (suma &lt; <span class="k">10</span>) suma += <span class="k">3</span>;</code></pre></section>
+
+<section id="arreglos"><h2>Arreglos y listas</h2>
+<p>Un <b>arreglo</b> guarda varios valores del mismo tipo; se accede por índice, que empieza en <b>0</b>.</p>
+<svg viewBox="0 0 400 70" width="380"><g stroke="#04aa6d" stroke-width="2" fill="#ddffdd"><rect x="10" y="10" width="70" height="34"/><rect x="80" y="10" width="70" height="34"/><rect x="150" y="10" width="70" height="34"/><rect x="220" y="10" width="70" height="34"/><rect x="290" y="10" width="70" height="34"/></g><g text-anchor="middle" font-size="14"><text x="45" y="33">8</text><text x="115" y="33">5</text><text x="185" y="33">9</text><text x="255" y="33">2</text><text x="325" y="33">7</text></g><g text-anchor="middle" font-size="12"><text x="45" y="62">[0]</text><text x="115" y="62">[1]</text><text x="185" y="62">[2]</text><text x="255" y="62">[3]</text><text x="325" y="62">[4]</text></g></svg>
+<pre><code><span class="t">int</span>[] notas = { <span class="k">8</span>, <span class="k">5</span>, <span class="k">9</span>, <span class="k">2</span>, <span class="k">7</span> };
+Console.WriteLine(notas[<span class="k">2</span>]); <span class="c">// 9</span>
+<span class="k">foreach</span> (<span class="t">int</span> n <span class="k">in</span> notas) Console.WriteLine(n);
+
+<span class="t">List</span>&lt;<span class="t">string</span>&gt; nombres = <span class="k">new</span>();  <span class="c">// tamaño dinámico</span>
+nombres.Add(<span class="s">"Ana"</span>);</code></pre></section>
+
+<section id="funciones"><h2>Funciones (métodos)</h2>
+<p>Un método agrupa código reutilizable. Recibe <b>parámetros</b> y puede <b>devolver</b> un valor.</p>
+<pre><code><span class="k">static</span> <span class="t">double</span> CalcularArea(<span class="t">double</span> baseT, <span class="t">double</span> altura)
+{
+    <span class="k">return</span> baseT * altura / <span class="k">2</span>;
+}
+<span class="t">double</span> a = CalcularArea(<span class="k">4</span>, <span class="k">3</span>); <span class="c">// 6</span></code></pre>
+<div class="box"><b>Tip:</b> usa <code>void</code> cuando el método no devuelve nada. Un método debe hacer <i>una sola cosa</i> y tener un nombre claro.</div></section>
+
+<section id="poo"><h2>¿Qué es la Programación Orientada a Objetos?</h2>
+<p>La POO modela el software como <b>objetos</b> del mundo real que tienen <i>datos</i> (atributos) y <i>comportamientos</i> (métodos). Sus cuatro pilares:</p>
+<div class="grid"><div class="card"><b>Abstracción</b><br>Modelar solo lo importante.</div><div class="card"><b>Encapsulamiento</b><br>Proteger los datos internos.</div><div class="card"><b>Herencia</b><br>Reutilizar clases base.</div><div class="card"><b>Polimorfismo</b><br>Un mismo método, varias formas.</div></div></section>
+
+<section id="clases"><h2>Clases y objetos</h2>
+<p>La <b>clase</b> es el molde (plano); el <b>objeto</b> es una instancia concreta creada con <code>new</code>.</p>
+<svg viewBox="0 0 560 170" width="540"><rect x="10" y="10" width="170" height="140" fill="#ddffdd" stroke="#04aa6d" stroke-width="2"/><path d="M10 38h170M10 95h170" stroke="#04aa6d" stroke-width="2"/><g font-size="12"><text x="95" y="30" text-anchor="middle" font-weight="bold">Estudiante</text><text x="18" y="56">+ Nombre : string</text><text x="18" y="74">+ Carnet : int</text><text x="18" y="116">+ Saludar() : void</text></g><path d="M180 80h90" stroke="#333" stroke-width="2" stroke-dasharray="5"/><text x="225" y="72" text-anchor="middle" font-size="11">new</text>
+<g fill="#fff" stroke="#04aa6d" stroke-width="2"><rect x="280" y="10" width="130" height="65"/><rect x="420" y="10" width="130" height="65"/><rect x="280" y="90" width="130" height="65"/></g><g font-size="12" text-anchor="middle"><text x="345" y="40">ana : Estudiante</text><text x="345" y="58">Nombre="Ana"</text><text x="485" y="40">luis : Estudiante</text><text x="485" y="58">Nombre="Luis"</text><text x="345" y="120">…más objetos</text></g></svg>
+<pre><code><span class="k">public class</span> <span class="t">Estudiante</span>
+{
+    <span class="k">public string</span> Nombre;
+    <span class="k">public int</span> Carnet;
+
+    <span class="k">public</span> Estudiante(<span class="k">string</span> nombre, <span class="k">int</span> carnet) <span class="c">// constructor</span>
+    { Nombre = nombre; Carnet = carnet; }
+
+    <span class="k">public void</span> Saludar() =&gt; Console.WriteLine(<span class="s">$"Hola, soy {Nombre}"</span>);
+}
+<span class="t">Estudiante</span> ana = <span class="k">new</span> <span class="t">Estudiante</span>(<span class="s">"Ana"</span>, <span class="k">1001</span>);
+ana.Saludar();</code></pre></section>
+
+<section id="encap"><h2>Encapsulamiento</h2>
+<p>Los datos se declaran <code>private</code> y se exponen mediante <b>propiedades</b> que pueden validar valores.</p>
+<table><tr><th>Modificador</th><th>Acceso</th></tr><tr><td><code>public</code></td><td>Desde cualquier lugar</td></tr><tr><td><code>private</code></td><td>Solo dentro de la clase</td></tr><tr><td><code>protected</code></td><td>Clase y clases derivadas</td></tr></table>
+<pre><code><span class="k">public class</span> <span class="t">Cuenta</span>
+{
+    <span class="k">private double</span> saldo;
+    <span class="k">public double</span> Saldo { <span class="k">get</span> =&gt; saldo; }
+    <span class="k">public void</span> Depositar(<span class="k">double</span> monto)
+    {
+        <span class="k">if</span> (monto &gt; <span class="k">0</span>) saldo += monto; <span class="c">// validación</span>
+    }
+}</code></pre></section>
+
+<section id="herencia"><h2>Herencia</h2>
+<p>Una clase derivada reutiliza los miembros de una clase base con la sintaxis <code>: Base</code>. Relación "es un".</p>
+<svg viewBox="0 0 500 170" width="460"><g fill="#ddffdd" stroke="#04aa6d" stroke-width="2"><rect x="170" y="5" width="160" height="45"/><rect x="40" y="110" width="150" height="45"/><rect x="310" y="110" width="150" height="45"/></g><g font-size="13" text-anchor="middle"><text x="250" y="25">Persona</text><text x="250" y="42" font-size="11">Nombre, Edad</text><text x="115" y="130">Estudiante</text><text x="115" y="147" font-size="11">+ Carrera</text><text x="385" y="130">Profesor</text><text x="385" y="147" font-size="11">+ Departamento</text></g><g stroke="#333" stroke-width="2" fill="none"><path d="M115 110V80h270v30M250 80V50"/></g></svg>
+<pre><code><span class="k">public class</span> <span class="t">Persona</span> { <span class="k">public string</span> Nombre; }
+<span class="k">public class</span> <span class="t">Estudiante</span> : <span class="t">Persona</span> { <span class="k">public string</span> Carrera; }</code></pre></section>
+
+<section id="poli"><h2>Polimorfismo</h2>
+<p>Permite que objetos de distintas clases respondan al mismo método de forma diferente, usando <code>virtual</code> y <code>override</code>.</p>
+<pre><code><span class="k">public class</span> <span class="t">Animal</span> { <span class="k">public virtual void</span> Sonido() =&gt; Console.WriteLine(<span class="s">"..."</span>); }
+<span class="k">public class</span> <span class="t">Perro</span> : <span class="t">Animal</span> { <span class="k">public override void</span> Sonido() =&gt; Console.WriteLine(<span class="s">"Guau"</span>); }
+<span class="k">public class</span> <span class="t">Gato</span> : <span class="t">Animal</span> { <span class="k">public override void</span> Sonido() =&gt; Console.WriteLine(<span class="s">"Miau"</span>); }
+
+<span class="t">Animal</span>[] zoo = { <span class="k">new</span> <span class="t">Perro</span>(), <span class="k">new</span> <span class="t">Gato</span>() };
+<span class="k">foreach</span> (<span class="t">var</span> a <span class="k">in</span> zoo) a.Sonido(); <span class="c">// Guau, Miau</span></code></pre></section>
+
+<section id="vs"><h2>Visual Studio de Microsoft</h2>
+<p><b>Visual Studio</b> es el IDE completo de Microsoft (diferente de Visual Studio Code, que es solo un editor). Incluye diseñador visual, depurador y compilador. Instala la edición <i>Community</i> (gratuita) y marca la carga de trabajo <b>"Desarrollo de escritorio con .NET"</b>.</p>
+<div class="box warn"><b>No confundir:</b> Visual Studio ≠ Visual Studio Code. En este curso usamos <b>Visual Studio</b>.</div>
+<svg viewBox="0 0 560 190" width="540"><rect x="5" y="5" width="550" height="180" fill="#f0f0f0" stroke="#666"/><rect x="5" y="5" width="550" height="22" fill="#5c2d91"/><text x="14" y="21" font-size="12" style="fill:#fff">Visual Studio — Form1.cs [Diseño]</text>
+<rect x="12" y="34" width="95" height="144" fill="#fff" stroke="#999"/><text x="20" y="50" font-size="11">Cuadro de</text><text x="20" y="63" font-size="11">herramientas</text><text x="20" y="85" font-size="10">▸ Button</text><text x="20" y="100" font-size="10">▸ TextBox</text><text x="20" y="115" font-size="10">▸ Label</text>
+<rect x="115" y="34" width="270" height="144" fill="#e8e8e8" stroke="#999"/><rect x="150" y="50" width="200" height="110" fill="#fff" stroke="#0078d7"/><text x="200" y="70" font-size="11">Form1</text><rect x="170" y="90" width="90" height="20" fill="#e1e1e1" stroke="#777"/><rect x="170" y="125" width="120" height="20" fill="#fff" stroke="#777"/>
+<rect x="393" y="34" width="75" height="68" fill="#fff" stroke="#999"/><text x="398" y="50" font-size="11">Explorador</text><text x="398" y="64" font-size="11">de soluciones</text><rect x="393" y="108" width="155" height="70" fill="#fff" stroke="#999"/><text x="398" y="124" font-size="11">Propiedades</text><text x="398" y="140" font-size="10">Text · Name · Size…</text><rect x="476" y="34" width="72" height="68" fill="#fff" stroke="#999"/><text x="480" y="50" font-size="11">Errores</text></svg></section>
+
+<section id="winforms"><h2>Tu primer proyecto Windows Forms</h2>
+<ol><li>Abre Visual Studio → <b>Crear un proyecto</b>.</li><li>Elige la plantilla <b>Aplicación de Windows Forms</b> (C#, .NET) y presiona <i>Siguiente</i>.</li><li>Nombre del proyecto (ej. <code>MiPrimeraApp</code>) → <b>Crear</b>.</li><li>Se abre <code>Form1</code> en el <b>Diseñador</b>. Arrastra controles desde el Cuadro de herramientas.</li><li>Ejecuta con <b>F5</b> (con depuración) o <b>Ctrl+F5</b>.</li></ol>
+<table><tr><th>Archivo</th><th>Función</th></tr><tr><td><code>Form1.cs</code></td><td>Tu código (eventos y lógica)</td></tr><tr><td><code>Form1.Designer.cs</code></td><td>Código generado por el diseñador (no editar a mano)</td></tr><tr><td><code>Program.cs</code></td><td>Punto de entrada: <code>Main()</code></td></tr></table>
+<div class="box"><b>Consejo:</b> cambia siempre la propiedad <code>Name</code> con prefijos: <code>btnGuardar</code>, <code>txtNombre</code>, <code>lblResultado</code>, <code>picLogo</code>.</div></section>
+
+<section id="controles"><h2>Controles básicos</h2>
+<p>Los controles se arrastran al formulario y se configuran en la ventana <b>Propiedades</b> (F4).</p>
+<table><tr><th>Control</th><th>Uso</th><th>Propiedades clave</th></tr>
+<tr><td><b>Label</b></td><td>Mostrar texto</td><td><code>Text</code>, <code>Font</code></td></tr>
+<tr><td><b>Button</b></td><td>Ejecutar una acción</td><td><code>Text</code>, <code>Enabled</code>, evento <code>Click</code></td></tr>
+<tr><td><b>TextBox</b></td><td>Entrada de texto</td><td><code>Text</code>, <code>Multiline</code>, <code>PasswordChar</code></td></tr>
+<tr><td><b>PictureBox</b></td><td>Mostrar imágenes</td><td><code>Image</code>, <code>SizeMode</code></td></tr>
+<tr><td><b>CheckBox</b></td><td>Opción sí/no</td><td><code>Checked</code></td></tr>
+<tr><td><b>RadioButton</b></td><td>Una opción entre varias</td><td><code>Checked</code></td></tr>
+<tr><td><b>ComboBox</b></td><td>Lista desplegable</td><td><code>Items</code>, <code>SelectedItem</code></td></tr>
+<tr><td><b>ListBox</b></td><td>Lista de elementos</td><td><code>Items</code>, <code>SelectedIndex</code></td></tr>
+<tr><td><b>DataGridView</b></td><td>Tabla de datos</td><td><code>Rows</code>, <code>DataSource</code></td></tr></table>
+<h3>Vista previa interactiva</h3>
+<div class="demo"><div class="win"><div class="tb"><span>Form1</span><span>✕</span></div><div class="bd">
+<label>Nombre:</label><input id="d-txt" placeholder="txtNombre">
+<label><input type="checkbox" id="d-chk"> Soy estudiante nuevo</label>
+<select id="d-cmb"><option>Ingeniería en Sistemas</option><option>Computer Science</option></select>
+<button onclick="saludar()">btnSaludar</button>
+<div id="d-lbl" style="min-height:36px;background:#fff;border:1px solid #bbb;padding:6px">lblResultado</div></div></div>
+<p style="font-size:13px">Escribe un nombre y pulsa el botón: eso es un evento <code>Click</code>.</p></div>
+<h3>Código C# equivalente</h3>
+<pre><code><span class="k">private void</span> btnSaludar_Click(<span class="k">object</span> sender, <span class="t">EventArgs</span> e)
+{
+    <span class="k">string</span> nombre = txtNombre.Text;
+    <span class="k">if</span> (<span class="t">string</span>.IsNullOrWhiteSpace(nombre))
+    {
+        <span class="t">MessageBox</span>.Show(<span class="s">"Escribe tu nombre"</span>);
+        <span class="k">return</span>;
+    }
+    lblResultado.Text = <span class="s">$"¡Hola {nombre}!"</span>;
+    <span class="k">if</span> (chkNuevo.Checked) lblResultado.Text += <span class="s">" Bienvenido a la U."</span>;
+}</code></pre>
+<h3>PictureBox</h3>
+<pre><code>picLogo.Image = <span class="t">Image</span>.FromFile(<span class="s">@"C:\imagenes\logo.png"</span>);
+picLogo.SizeMode = <span class="t">PictureBoxSizeMode</span>.Zoom; <span class="c">// ajusta sin deformar</span>
+<span class="c">// O desde el diseñador: Propiedades → Image → Importar</span></code></pre></section>
+
+<section id="eventos"><h2>Eventos</h2>
+<p>Las aplicaciones de Windows son <b>dirigidas por eventos</b>: el programa espera acciones del usuario y reacciona.</p>
+<svg viewBox="0 0 600 70" width="560"><g fill="#ddffdd" stroke="#04aa6d" stroke-width="2"><rect x="5" y="15" width="120" height="40" rx="6"/><rect x="170" y="15" width="120" height="40" rx="6"/><rect x="335" y="15" width="120" height="40" rx="6"/><rect x="480" y="15" width="115" height="40" rx="6"/></g><g font-size="12" text-anchor="middle"><text x="65" y="40">Usuario hace clic</text><text x="230" y="40">Evento Click</text><text x="395" y="40">Método manejador</text><text x="537" y="40">UI se actualiza</text></g><g stroke="#333" stroke-width="2"><path d="M125 35h45M290 35h45M455 35h25"/></g></svg>
+<table><tr><th>Evento</th><th>Se dispara cuando…</th></tr><tr><td><code>Click</code></td><td>Se hace clic en el control</td></tr><tr><td><code>TextChanged</code></td><td>Cambia el texto de un TextBox</td></tr><tr><td><code>Load</code></td><td>El formulario se carga</td></tr><tr><td><code>SelectedIndexChanged</code></td><td>Cambia la selección de una lista</td></tr><tr><td><code>KeyPress</code></td><td>Se pulsa una tecla</td></tr></table>
+<div class="box"><b>Truco:</b> haz <i>doble clic</i> sobre un botón en el diseñador y Visual Studio crea el método <code>Click</code> por ti.</div></section>
+
+<section id="proyecto"><h2>Mini proyecto: Calculadora de IMC</h2>
+<p>Integra variables, condicionales, métodos y controles. Controles necesarios: 2 <code>TextBox</code> (<code>txtPeso</code>, <code>txtAltura</code>), 1 <code>Button</code> (<code>btnCalcular</code>) y 1 <code>Label</code> (<code>lblResultado</code>).</p>
+<pre><code><span class="k">private void</span> btnCalcular_Click(<span class="k">object</span> sender, <span class="t">EventArgs</span> e)
+{
+    <span class="k">if</span> (!<span class="t">double</span>.TryParse(txtPeso.Text, <span class="k">out double</span> peso) ||
+        !<span class="t">double</span>.TryParse(txtAltura.Text, <span class="k">out double</span> altura) || altura &lt;= <span class="k">0</span>)
+    {
+        <span class="t">MessageBox</span>.Show(<span class="s">"Ingresa valores numéricos válidos."</span>);
+        <span class="k">return</span>;
+    }
+    <span class="k">double</span> imc = peso / (altura * altura);
+    lblResultado.Text = <span class="s">$"IMC: {imc:F1} - {Clasificar(imc)}"</span>;
+}
+
+<span class="k">private string</span> Clasificar(<span class="k">double</span> imc)
+{
+    <span class="k">if</span> (imc &lt; <span class="k">18.5</span>) <span class="k">return</span> <span class="s">"Bajo peso"</span>;
+    <span class="k">if</span> (imc &lt; <span class="k">25</span>) <span class="k">return</span> <span class="s">"Normal"</span>;
+    <span class="k">if</span> (imc &lt; <span class="k">30</span>) <span class="k">return</span> <span class="s">"Sobrepeso"</span>;
+    <span class="k">return</span> <span class="s">"Obesidad"</span>;
+}</code></pre>
+<div class="box"><b>Reto:</b> crea una clase <code>Persona</code> con propiedades <code>Peso</code> y <code>Altura</code> y un método <code>CalcularIMC()</code>; usa un objeto en el botón en lugar de variables sueltas.</div></section>
+
+<section id="quiz"><h2>Autoevaluación</h2>
+<div class="demo q" id="quiz"></div></section>
+</main></div>
+<footer>Material de apoyo · Fundamentos de Programación y POO · C# / Windows Forms / Visual Studio</footer>
+<script>
+function saludar(){var n=document.getElementById('d-txt').value.trim(),l=document.getElementById('d-lbl');
+l.textContent=n?'¡Hola '+n+'!'+(document.getElementById('d-chk').checked?' Bienvenido a la U.':'')+' ('+document.getElementById('d-cmb').value+')':'⚠ Escribe tu nombre';}
+var Q=[["¿Qué índice tiene el primer elemento de un arreglo en C#?",["1","0","-1"],1],
+["¿Qué pilar de la POO protege los datos internos de una clase?",["Herencia","Polimorfismo","Encapsulamiento"],2],
+["¿Qué operador compara igualdad?",["=","==","=>"],1],
+["¿Qué control muestra imágenes en Windows Forms?",["Label","PictureBox","ListBox"],1],
+["¿Cuál es el resultado de 7 / 2 con enteros en C#?",["3","3.5","4"],0]];
+var qz=document.getElementById('quiz');
+Q.forEach(function(q,i){var d=document.createElement('div');d.innerHTML='<p><b>'+(i+1)+'. '+q[0]+'</b></p>';
+q[1].forEach(function(o,j){var b=document.createElement('button');b.textContent=o;b.onclick=function(){
+d.querySelectorAll('button').forEach(function(x){x.disabled=true});b.classList.add(j===q[2]?'ok':'no');
+if(j!==q[2])d.querySelectorAll('button')[q[2]].classList.add('ok');};d.appendChild(b);});qz.appendChild(d);});
+var links=document.querySelectorAll('nav a');
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-20% 0px -70% 0px'});
+document.querySelectorAll('section').forEach(function(s){obs.observe(s)});
+links.forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
+</script>
+</body>
+</html>
